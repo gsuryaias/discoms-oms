@@ -17,6 +17,13 @@ class ApcpdclScraper(BaseScraper):
     report_url = "https://apcpdcl.in/OMS/"
     table_selector = "table"
 
+    def scrape(self, page) -> list[dict]:
+        # Not yet wired to the real endpoint — fail cleanly so the orchestrator
+        # marks APCPDCL "unreachable" instead of scraping garbage. Use --mock for
+        # demo data. Remove this override once report_url/table_selector are
+        # confirmed via DevTools (see README).
+        raise NotImplementedError("APCPDCL live endpoint not yet confirmed")
+
     def mock_rows(self) -> list[dict]:
         return [
             {"District": "Vijayawada", "Division": "Vijayawada Urban-1", "SubDivision": "Governorpet",

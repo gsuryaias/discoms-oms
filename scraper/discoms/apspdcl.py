@@ -17,6 +17,10 @@ class ApspdclScraper(BaseScraper):
     report_url = "https://www.apspdcl.in/OMS/omsweb"
     table_selector = "table"
 
+    def scrape(self, page) -> list[dict]:
+        # Not yet wired — see APCPDCL note. Fail cleanly; use --mock for demo.
+        raise NotImplementedError("APSPDCL live endpoint not yet confirmed")
+
     def mock_rows(self) -> list[dict]:
         return [
             {"Circle": "Tirupati", "Division": "Tirupati Urban", "Sub-Division": "Tirupati-1",

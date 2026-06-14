@@ -1,55 +1,72 @@
-"""APEPDCL (Eastern) scraper.
+"""APEPDCL (Eastern) scraper — WIRED TO LIVE DATA.
 
-Portal: https://oms.apeasternpower.com/homenew  (server-rendered, jsessionid)
-Live-interruption report renders an HTML table. The exact report URL/selector
-below is a placeholder — confirm it once with browser DevTools (Network tab,
-filter XHR/Doc) on the live "11KV/33KV Live Interruptions" screen, then update
-report_url + table_selector. Nothing else changes.
+Source: https://oms.apeasternpower.com/HTServicesLiveInterruptions
+A server-rendered `table.dashboard-table` of currently-interrupted 11kV HT
+services. Columns (confirmed 2026-06):
+
+  Sl. No | Circle Name | Division | Sub-Division Name | Section |
+  Consumer Number | Short Name | CMD (KVA) | Outage Start Time |
+  Outage End Time | Interruption Duration
+
+"Outage End Time" is literally "OPEN" while the service is still out, else a
+timestamp. We derive a clean Status/Restored Time from it, expand the 3-letter
+Circle code to a full district name (for centroid mapping), and tag each row as
+one affected service. Everything else (date parsing, ids) is handled generically
+by the normalizer via configs/apepdcl.yaml.
 """
 
 from __future__ import annotations
 
 from base import BaseScraper
 
+# EPDCL circle codes → district name (must match keys in geo/centroids.json).
+# Best-effort; unknown codes pass through unmapped (no pin, logged by geo).
+CIRCLE_MAP = {
+    "SKL": "Srikakulam", "PVP": "Parvathipuram", "VZM": "Vizianagaram",
+    "VSP": "Visakhapatnam", "AKP": "Anakapalli", "ASR": "Alluri Sitharama Raju",
+    "KKD": "Kakinada", "AML": "Amalapuram", "RJY": "Rajahmundry", "ELR": "Eluru",
+}
+
+# Volatile columns dropped before hashing so an outage's id stays stable across
+# polls (duration ticks up every scrape; Sl. No re-numbers on sort).
+_VOLATILE = ["Sl. No", "Interruption Duration (HH:MM:SS)"]
+
 
 class ApepdclScraper(BaseScraper):
     config_name = "apepdcl"
-    # TODO(confirm): open the live-interruptions report, copy its URL here.
-    report_url = "https://oms.apeasternpower.com/homenew"
-    table_selector = "table"  # TODO(confirm): e.g. "#liveInterruptionsGrid table"
+    report_url = "https://oms.apeasternpower.com/HTServicesLiveInterruptions"
+    table_selector = "table.dashboard-table"
 
+    def scrape(self, page) -> list[dict]:
+        rows = super().scrape(page)
+        out = []
+        for r in rows:
+            circle = (r.get("Circle Name") or "").strip()
+            if not circle:               # skip blank / totals rows
+                continue
+            end = (r.get("Outage End Time") or "").strip()
+            is_open = end == "" or end.upper() == "OPEN"
+            for k in _VOLATILE:
+                r.pop(k, None)
+            r["District"] = CIRCLE_MAP.get(circle.upper(), circle)
+            r["Status"] = "OPEN" if is_open else "CLOSED"
+            r["Restored Time"] = "" if is_open else end
+            r["Voltage"] = "11kV"
+            r["Services"] = "1"          # each HT row = one interrupted service
+            out.append(r)
+        return out
+
+    # Fixture mirrors the live raw shape so --mock exercises the same path.
     def mock_rows(self) -> list[dict]:
-        # Raw rows exactly as the portal's table would yield them (its own
-        # column headers). The normalizer maps these via configs/apepdcl.yaml.
         return [
-            {"Circle": "Visakhapatnam", "Division": "Vizag Urban", "Sub Division": "Gajuwaka",
-             "Section": "Kurmannapalem", "Feeder": "11KV Steel Plant", "Voltage": "11KV",
-             "Type": "FORCED", "Reason": "Cable Fault", "Affected Services": "2150",
-             "Villages": "Gajuwaka, Kurmannapalem", "Trip Time": "14-06-2026 09:12",
-             "Expected Restoration": "14-06-2026 12:30", "Status": "OPEN"},
-            {"Circle": "Visakhapatnam", "Division": "Vizag Rural", "Sub Division": "Anakapalle",
-             "Section": "Anakapalle Town", "Feeder": "11KV Market", "Voltage": "11KV",
-             "Type": "PLANNED", "Reason": "Maintenance", "Affected Services": "880",
-             "Villages": "Anakapalle", "Trip Time": "14-06-2026 06:00",
-             "Expected Restoration": "14-06-2026 10:00", "Status": "OPEN"},
-            {"Circle": "Vizianagaram", "Division": "Vizianagaram", "Sub Division": "Bobbili",
-             "Section": "Bobbili", "Feeder": "33KV Bobbili Town", "Voltage": "33KV",
-             "Type": "FORCED", "Reason": "Tree Fall", "Affected Services": "3400",
-             "Villages": "Bobbili, Therlam", "Trip Time": "14-06-2026 08:45",
-             "Expected Restoration": "", "Status": "OPEN"},
-            {"Circle": "Srikakulam", "Division": "Srikakulam", "Sub Division": "Amadalavalasa",
-             "Section": "Amadalavalasa", "Feeder": "11KV Rural", "Voltage": "11KV",
-             "Type": "FORCED", "Reason": "Lightning", "Affected Services": "1200",
-             "Villages": "Amadalavalasa", "Trip Time": "14-06-2026 07:20",
-             "Expected Restoration": "14-06-2026 09:00", "Status": "CLOSED"},
-            {"Circle": "Kakinada", "Division": "Kakinada", "Sub Division": "Kakinada Town",
-             "Section": "Sarpavaram", "Feeder": "11KV Sarpavaram", "Voltage": "11KV",
-             "Type": "PLANNED", "Reason": "Line Shifting", "Affected Services": "640",
-             "Villages": "Sarpavaram", "Trip Time": "14-06-2026 05:30",
-             "Expected Restoration": "14-06-2026 08:30", "Status": "CLOSED"},
-            {"Circle": "Rajahmundry", "Division": "Rajahmundry", "Sub Division": "RJY Town",
-             "Section": "Danavaipeta", "Feeder": "11KV Danavaipeta", "Voltage": "11KV",
-             "Type": "FORCED", "Reason": "Transformer Failure", "Affected Services": "1950",
-             "Villages": "Danavaipeta", "Trip Time": "14-06-2026 10:05",
-             "Expected Restoration": "", "Status": "OPEN"},
+            {"Circle Name": "SKL", "Division": "PALAKONDA", "Sub-Division Name": "PALAKONDA",
+             "Section": "PALAKONDA", "Consumer Number": "SKL443", "Short Name": "M/S. PALAKONDA GOVT. HOSPITAL",
+             "CMD (KVA)": "210", "Outage Start Time": "14-06-2026 13:34:38", "Outage End Time": "OPEN"},
+            {"Circle Name": "RJY", "Division": "JAGGAMPETA", "Sub-Division Name": "TUNI",
+             "Section": "HAMSAVARAM", "Consumer Number": "RJY1037", "Short Name": "VIJAYA SAI PLASTICS",
+             "CMD (KVA)": "490", "Outage Start Time": "14-06-2026 08:24:50", "Outage End Time": "OPEN"},
+            {"Circle Name": "ELR", "Division": "NARSAPURAM", "Sub-Division Name": "PALAKOL",
+             "Section": "PODURU", "Consumer Number": "ELR926", "Short Name": "LAKSHMI SRINIVASA RICE MILL",
+             "CMD (KVA)": "120", "Outage Start Time": "14-06-2026 13:32:42",
+             "Outage End Time": "14-06-2026 14:05:00"},
         ]

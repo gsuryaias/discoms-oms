@@ -1,31 +1,23 @@
-# APEPDCL (Eastern) column dialect -> canonical schema.
-# field_map: canonical_field -> the raw column header on the portal table.
-# Edit this when the portal renames a column. No code change needed.
+# APEPDCL (Eastern) — LIVE: HTServicesLiveInterruptions table.
+# The scraper (discoms/apepdcl.py) pre-computes District / Status / Restored
+# Time / Voltage / Services; this config just maps those onto the schema.
 discom: APEPDCL
-date_dayfirst: true            # portal prints DD-MM-YYYY
+date_dayfirst: true            # portal prints DD-MM-YYYY HH:MM:SS
 
 field_map:
-  district: "Circle"           # EPDCL's top admin unit ~ district granularity
+  district: "District"             # full name (scraper expands the circle code)
   division: "Division"
-  subdivision: "Sub Division"
+  subdivision: "Sub-Division Name"
   section: "Section"
-  feeder_name: "Feeder"
+  feeder_name: "Short Name"        # HT consumer / installation name
+  feeder_id: "Consumer Number"
   voltage_class: "Voltage"
-  outage_type: "Type"
-  cause: "Reason"
-  affected_consumers: "Affected Services"
-  affected_villages: "Villages"
-  outage_start: "Trip Time"
-  expected_restoration: "Expected Restoration"
+  affected_consumers: "Services"   # 1 per interrupted HT service
+  outage_start: "Outage Start Time"
+  restored_at: "Restored Time"
   status: "Status"
 
 value_map:
   status:
     OPEN: ongoing
     CLOSED: restored
-  outage_type:
-    FORCED: unplanned
-    PLANNED: planned
-  voltage_class:
-    "11KV": 11kV
-    "33KV": 33kV
