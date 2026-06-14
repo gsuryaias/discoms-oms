@@ -108,8 +108,12 @@ function buildFilters() {
   [["all", "All"], ["ongoing", "Ongoing"], ["restored", "Restored"]].forEach(([v, label]) =>
     sc.appendChild(chip(label, () => { OMS.state.status = v; OMS.render(true); }, v)));
 
-  // voltage + type selects, populated from the data
-  const volts = [...new Set(OMS.state.outages.map((o) => o.voltage_class).filter(Boolean))].sort();
+  // voltage select: always offer the standard classes (11kV/33kV) so the filter
+  // is predictable even when one is momentarily empty, plus anything else seen.
+  const STD = ["11kV", "33kV"];
+  const found = OMS.state.outages.map((o) => o.voltage_class).filter(Boolean);
+  const volts = [...new Set([...STD, ...found])].sort(
+    (a, b) => (parseInt(a, 10) || 0) - (parseInt(b, 10) || 0));
   fillSelect($("voltageSelect"), [["all", "All voltages"], ...volts.map((v) => [v, v])], "voltage");
   const types = [...new Set(OMS.state.outages.map((o) => o.outage_type).filter(Boolean))].sort();
   fillSelect($("typeSelect"), [["all", "All types"], ...types.map((t) => [t, cap(t)])], "type");

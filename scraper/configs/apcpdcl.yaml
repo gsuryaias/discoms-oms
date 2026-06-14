@@ -14,8 +14,10 @@ field_map:
   voltage_class: "Voltage"
   cause: "Interruption Reason (Entered in AE Login)"
   outage_start: "Outage Start Time"
+  restored_at: "Restored Time"        # only the 33kV feed reports an end time
   status: "Status"
 
 value_map:
   status:
     OPEN: ongoing
+    CLOSED: restored

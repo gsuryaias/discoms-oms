@@ -22,6 +22,8 @@ from base import BaseScraper
 IST = tz.gettz("Asia/Kolkata")
 DATA_URL = "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection"
 PAGE_URL = "https://apcpdcl.in/OMS/performanceDailyReportSection1"
+DATA_URL_33 = "https://apcpdcl.in/OMS/liveInterruption33kvDailyReport"
+PAGE_URL_33 = "https://apcpdcl.in/OMS/liveInterruption33kvDailyReportPage"
 
 
 class ApcpdclScraper(BaseScraper):
@@ -31,21 +33,50 @@ class ApcpdclScraper(BaseScraper):
 
     def fetch(self, page=None) -> list[dict]:
         date_str = dt.datetime.now(tz=IST).strftime("%d-%b-%Y")   # 14-Jun-2026
+        # 11kV feeders. CPDCL renders the data into #intermediateTable; the
+        # visible #dataTable is built client-side and is empty in the response.
         html = http.post_html(DATA_URL, {"DATE": date_str, "CIRCLE": "0", "SECTIONID": "ALL"}, PAGE_URL)
-        # CPDCL renders the data into #intermediateTable; #dataTable is built
-        # client-side by DataTables and is empty in the raw response.
-        return http.parse_table(html, "table#intermediateTable")
+        rows = http.parse_table(html, "table#intermediateTable")
+        for r in rows:
+            r["_src"] = "11kv"
+
+        # 33kV feeders (separate live report). Isolated: a failure here must not
+        # drop the 11kV data, so swallow errors and keep going.
+        try:
+            html33 = http.post_html(DATA_URL_33, {"DATE": date_str, "CIRCLE": "0"}, PAGE_URL_33)
+            rows33 = (http.parse_table(html33, "table#intermediateTable")
+                      or http.parse_table(html33, "table#liveInterruptionTable"))
+            for r in rows33:
+                r["_src"] = "33kv"
+            rows.extend(rows33)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[APCPDCL] 33kV feed skipped: {exc!r}")
+        return rows
 
     def transform(self, rows: list[dict]) -> list[dict]:
         out = []
         for r in rows:
-            if not (r.get("Circle Name") or "").strip():
-                continue
-            name, fid, volt = http.split_feeder(r.get("Feeder Name", ""))
-            r["FeederName"], r["FeederId"], r["Voltage"] = name, fid, volt
-            r["SubDiv"] = http.strip_brackets(r.get("Sub-Division Name", ""))
-            r["Status"] = "OPEN"                       # live report = currently out
-            out.append(r)
+            if r.get("_src") == "33kv":
+                if not (r.get("Circle Name") or "").strip():
+                    continue
+                end = (r.get("Outage End Time") or "").strip()
+                is_open = end == "" or end.upper() == "OPEN"
+                r["FeederName"] = (r.get("Feeder Name") or "").strip() or r.get("Feeder Id")
+                r["FeederId"] = r.get("Feeder Id")
+                r["Voltage"] = "33kV"
+                r["SubDiv"] = http.strip_brackets(r.get("Sub DivisionName", ""))
+                r["Section Name"] = ""
+                r["Status"] = "OPEN" if is_open else "CLOSED"
+                r["Restored Time"] = "" if is_open else end
+                out.append(r)
+            else:
+                if not (r.get("Circle Name") or "").strip():
+                    continue
+                name, fid, volt = http.split_feeder(r.get("Feeder Name", ""))
+                r["FeederName"], r["FeederId"], r["Voltage"] = name, fid, volt
+                r["SubDiv"] = http.strip_brackets(r.get("Sub-Division Name", ""))
+                r["Status"] = "OPEN"                   # live report = currently out
+                out.append(r)
         return out
 
     def mock_rows(self) -> list[dict]:
@@ -60,4 +91,7 @@ class ApcpdclScraper(BaseScraper):
              "Division Name": "GUNTUR", "Sub-Division Name": "SD-MANGALAGIRI [ 9440811234 ]",
              "Section Name": "SEC-PEDAKAKANI", "Outage Start Time": "14-06-2026 11:02:10",
              "Interruption Reason (Entered in AE Login)": "Conductor cut rf work"},
+            {"_src": "33kv", "Circle Name": "NTR", "Division Name": "VIJAYAWADA",
+             "Sub DivisionName": "SD-PATAMATA", "Feeder Name": "GANGURU", "Feeder Id": "33107",
+             "Outage Start Time": "14-06-2026 12:10:00", "Outage End Time": "OPEN"},
         ]
