@@ -1,30 +1,20 @@
-# APSPDCL (Southern) column dialect -> canonical schema.
+# APSPDCL (Southern) — LIVE: performanceDailyReportSection / sectionwiseDailyPowerSection.
+# Same OMS app as CPDCL; columns differ slightly (Circle/Division, combined
+# "Sub Division/ Section"). Scraper pre-computes FeederName/FeederId/Voltage/Status.
 discom: APSPDCL
-date_dayfirst: true            # portal prints DD-MM-YYYY
+date_dayfirst: true
 
 field_map:
-  district: "Circle"
+  district: "Circle"               # full district name (e.g. KURNOOL)
   division: "Division"
-  subdivision: "Sub-Division"
-  section: "Section"
-  feeder_name: "Feeder"
-  voltage_class: "Volt"
-  outage_type: "Nature"
-  cause: "Cause of Interruption"
-  affected_consumers: "No. of Services"
-  affected_villages: "Villages Affected"
-  outage_start: "Off Time"
-  expected_restoration: "Expected On Time"
-  restored_at: "On Time"
-  status: "Stage"
+  subdivision: "Sub Division/ Section"
+  feeder_name: "FeederName"
+  feeder_id: "FeederId"
+  voltage_class: "Voltage"
+  cause: "Interruption Reason (Entered in AE Login)"
+  outage_start: "Outage Start Time"
+  status: "Status"
 
 value_map:
   status:
-    "OFF": ongoing
-    "ON": restored
-  outage_type:
-    Unplanned: unplanned
-    Planned: planned
-  voltage_class:
-    "11KV": 11kV
-    "33KV": 33kV
+    OPEN: ongoing

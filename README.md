@@ -71,29 +71,35 @@ cd ../docs && python3 -m http.server 8000   # → http://localhost:8000
    Pages redeploys. Trigger the first run manually via **Actions → Scrape OMS →
    Run workflow**.
 
-## ⚠️ Before it shows REAL data: confirm the report endpoints
+## Live data sources (all three wired)
 
-The scrapers currently ship **mock fixtures** plus best-guess report URLs. To go
-live you must do this once per portal (it's the only manual step):
+All three portals run the same Java OMS app and serve their live-interruption
+table from a POST that returns an HTML fragment — so we fetch it directly over
+HTTP (`scraper/portal_http.py`), no browser needed:
 
-1. Open the portal's **live-interruption** report in Chrome with **DevTools →
-   Network** open.
-2. Note the request URL that returns the outage table, and the table's CSS
-   selector.
-3. Put them in the matching `scraper/discoms/*.py` (`report_url`,
-   `table_selector`). If columns differ from the fixtures, adjust the
-   `field_map` in `scraper/configs/*.yaml` — **that's a config edit, not code.**
+| DISCOM | POST endpoint | body | table |
+|--------|---------------|------|-------|
+| APEPDCL | `/HTServiceDailyPowerSection` | `DATE=DD-MM-YYYY&CIRCLE=0` | `table.dashboard-table` (11kV HT services) |
+| APCPDCL | `/sectionwiseDailyPowerSection` | `DATE=DD-Mon-YYYY&CIRCLE=0&SECTIONID=ALL` | `table#intermediateTable` (11kV feeders) |
+| APSPDCL | `/sectionwiseDailyPowerSection` | `date=DD-MM-YYYY&circle=0&division=ALL&section=ALL` | `table#dataTable` (11kV feeders) |
 
-The architecture is built so one portal changing its HTML breaks only its own
-module; the other two keep publishing (see the per-DISCOM `try/except` in
-`scrape.py` and the health strip in the UI).
+Each portal's column dialect lives in `scraper/configs/*.yaml`; per-portal cleanup
+(circle-code expansion, feeder name/id parsing, status) lives in its
+`scraper/discoms/*.py`. The portals serve an **incomplete TLS chain**, so
+`portal_http` falls back to unverified TLS (safe: public, read-only data) and
+retries transient drops. If a portal changes its HTML, only its own module
+breaks — the others keep publishing (per-DISCOM `try/except` in `scrape.py` + the
+health strip in the UI). `--mock` runs all three on fixtures offline.
 
 ## Roadmap / known gaps
 
-- **Feeder coordinates** (`scraper/geo/feeder_coords.csv`) are seeded for the
-  mock feeders only. Precise pins require growing this lookup; unmapped feeders
-  fall back to a district centroid and render as hollow "approximate" markers.
-  The scraper logs every unmapped feeder to make the CSV easy to extend.
+- **Feeder coordinates** (`scraper/geo/feeder_coords.csv`): live feeders pin to
+  their **district centroid** (hollow "approximate" markers) because the portals
+  give no lat/lng. Precise pins require growing this lookup keyed by
+  `(discom, feeder_name)`; the scraper logs every unmapped feeder to make it easy.
+- **Consumer counts**: EPDCL HT rows count one service each; CPDCL/SPDCL are
+  feeder-level with no per-feeder consumer count, so "Consumers affected" reflects
+  EPDCL only. Could be enriched from a feeder→consumer-count table later.
 - **Trend charts**: `docs/data/history/` accumulates slim snapshots every run —
   wire these into a time-series view (outages over the day/week).
 - **District boundary shading**: drop an AP districts GeoJSON into the map for

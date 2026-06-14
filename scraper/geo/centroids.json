@@ -13,8 +13,21 @@
   "Eluru":         {"lat": 16.7107, "lng": 81.0952},
   "Machilipatnam": {"lat": 16.1875, "lng": 81.1389},
   "Tirupati":      {"lat": 13.6288, "lng": 79.4192},
+  "Chittoor":      {"lat": 13.2172, "lng": 79.1003},
   "Nellore":       {"lat": 14.4426, "lng": 79.9865},
   "Kadapa":        {"lat": 14.4673, "lng": 78.8242},
   "Anantapur":     {"lat": 14.6819, "lng": 77.6006},
-  "Kurnool":       {"lat": 15.8281, "lng": 78.0373}
+  "Kurnool":       {"lat": 15.8281, "lng": 78.0373},
+
+  "NTR":           {"lat": 16.5100, "lng": 80.6200},
+  "CRDA":          {"lat": 16.5410, "lng": 80.5150},
+  "Krishna":       {"lat": 16.4500, "lng": 81.0000},
+  "Palnadu":       {"lat": 16.2350, "lng": 80.0450},
+  "Bapatla":       {"lat": 15.9043, "lng": 80.4674},
+  "Prakasam":      {"lat": 15.5057, "lng": 80.0490},
+  "Markapuram":    {"lat": 15.7350, "lng": 79.2700},
+
+  "Nandyal":       {"lat": 15.4780, "lng": 78.4830},
+  "Annamayya":     {"lat": 14.0500, "lng": 78.7500},
+  "Srisathyasai":  {"lat": 14.1600, "lng": 77.8100}
 }

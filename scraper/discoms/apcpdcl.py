@@ -1,54 +1,63 @@
-"""APCPDCL (Central) scraper.
+"""APCPDCL (Central) scraper — LIVE via direct HTTP.
 
-Portal: https://apcpdcl.in/OMS/  (server-rendered, jsessionid)
-Live report endpoints observed in the menu include names like
-`liveInterruAnalysisg10m`. Confirm the actual report URL + table selector with
-DevTools, then update below. Column dialect is handled in configs/apcpdcl.yaml.
+Live 11kV interruptions (feeder-level). The page performanceDailyReportSection1
+fills table#dataTable from:
+    POST https://apcpdcl.in/OMS/sectionwiseDailyPowerSection
+    body: DATE=<DD-Mon-YYYY>&CIRCLE=0&SECTIONID=ALL
+
+Circle is already a full district name (e.g. PALNADU). Every listed feeder is
+currently out, so status is ongoing. transform() cleans the feeder name/id,
+derives voltage, and strips the phone-number suffix off the subdivision.
 """
 
 from __future__ import annotations
 
+import datetime as dt
+
+from dateutil import tz
+
+import portal_http as http
 from base import BaseScraper
+
+IST = tz.gettz("Asia/Kolkata")
+DATA_URL = "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection"
+PAGE_URL = "https://apcpdcl.in/OMS/performanceDailyReportSection1"
 
 
 class ApcpdclScraper(BaseScraper):
     config_name = "apcpdcl"
-    # TODO(confirm): e.g. "https://apcpdcl.in/OMS/liveInterruAnalysisg10m"
-    report_url = "https://apcpdcl.in/OMS/"
-    table_selector = "table"
     requires_browser = False
+    report_url = PAGE_URL
 
     def fetch(self, page=None) -> list[dict]:
-        # Not yet wired to the real endpoint — fail cleanly so the orchestrator
-        # marks APCPDCL "unreachable" instead of scraping garbage. Use --mock for
-        # demo data. Remove this once the live POST/table is confirmed (README).
-        raise NotImplementedError("APCPDCL live endpoint not yet confirmed")
+        date_str = dt.datetime.now(tz=IST).strftime("%d-%b-%Y")   # 14-Jun-2026
+        html = http.post_html(DATA_URL, {"DATE": date_str, "CIRCLE": "0", "SECTIONID": "ALL"}, PAGE_URL)
+        # CPDCL renders the data into #intermediateTable; #dataTable is built
+        # client-side by DataTables and is empty in the raw response.
+        return http.parse_table(html, "table#intermediateTable")
+
+    def transform(self, rows: list[dict]) -> list[dict]:
+        out = []
+        for r in rows:
+            if not (r.get("Circle Name") or "").strip():
+                continue
+            name, fid, volt = http.split_feeder(r.get("Feeder Name", ""))
+            r["FeederName"], r["FeederId"], r["Voltage"] = name, fid, volt
+            r["SubDiv"] = http.strip_brackets(r.get("Sub-Division Name", ""))
+            r["Status"] = "OPEN"                       # live report = currently out
+            out.append(r)
+        return out
 
     def mock_rows(self) -> list[dict]:
         return [
-            {"District": "Vijayawada", "Division": "Vijayawada Urban-1", "SubDivision": "Governorpet",
-             "Section": "Governorpet", "Feeder Name": "11KV Governorpet", "KV": "11",
-             "Outage Type": "U", "Cause": "Cable Fault", "Consumers Affected": "2600",
-             "Affected Areas": "Governorpet; Labbipet", "Interruption Time": "14/06/2026 09:40",
-             "ETR": "14/06/2026 13:00", "Restored Time": "", "Current Status": "OFF"},
-            {"District": "Vijayawada", "Division": "Vijayawada Rural", "SubDivision": "Gannavaram",
-             "Section": "Gannavaram", "Feeder Name": "11KV Airport", "KV": "11",
-             "Outage Type": "P", "Cause": "Maintenance", "Consumers Affected": "740",
-             "Affected Areas": "Gannavaram", "Interruption Time": "14/06/2026 06:30",
-             "ETR": "14/06/2026 09:30", "Restored Time": "14/06/2026 09:10", "Current Status": "ON"},
-            {"District": "Guntur", "Division": "Guntur-1", "SubDivision": "Brodipet",
-             "Section": "Brodipet", "Feeder Name": "11KV Brodipet", "KV": "11",
-             "Outage Type": "U", "Cause": "Overload Tripping", "Consumers Affected": "1850",
-             "Affected Areas": "Brodipet; Arundelpet", "Interruption Time": "14/06/2026 11:15",
-             "ETR": "", "Restored Time": "", "Current Status": "OFF"},
-            {"District": "Eluru", "Division": "Eluru", "SubDivision": "Eluru Town",
-             "Section": "R R Pet", "Feeder Name": "33KV Eluru Town", "KV": "33",
-             "Outage Type": "U", "Cause": "Tree Fall", "Consumers Affected": "4100",
-             "Affected Areas": "R R Pet; Powerpet", "Interruption Time": "14/06/2026 08:20",
-             "ETR": "14/06/2026 12:00", "Restored Time": "", "Current Status": "OFF"},
-            {"District": "Machilipatnam", "Division": "Machilipatnam", "SubDivision": "Bandar",
-             "Section": "Bandar Town", "Feeder Name": "11KV Bandar", "KV": "11",
-             "Outage Type": "P", "Cause": "Line Shifting", "Consumers Affected": "560",
-             "Affected Areas": "Machilipatnam", "Interruption Time": "14/06/2026 05:45",
-             "ETR": "14/06/2026 08:00", "Restored Time": "14/06/2026 07:50", "Current Status": "ON"},
+            {"Feeder Name": "11KV TERALA [ 302211340303 ] [ RURAL (AGL+DOMESTIC) ]",
+             "Sub Station Name": "33/11KV MANDADI SUB-STATION", "Circle Name": "PALNADU",
+             "Division Name": "MACHERLA", "Sub-Division Name": "SD-MACHERLA [ 9440812279 ]",
+             "Section Name": "SEC-VELDURTHI", "Outage Start Time": "14-06-2026 08:31:46",
+             "Interruption Reason (Entered in AE Login)": "3-ph/S-ph Phase Changing"},
+            {"Feeder Name": "11KV CHANDRALA RURAL FEEDER [ 301311540202 ] [ RURAL (AGL+DOMESTIC) ]",
+             "Sub Station Name": "33/11KV PEDAKAKANI", "Circle Name": "GUNTUR",
+             "Division Name": "GUNTUR", "Sub-Division Name": "SD-MANGALAGIRI [ 9440811234 ]",
+             "Section Name": "SEC-PEDAKAKANI", "Outage Start Time": "14-06-2026 11:02:10",
+             "Interruption Reason (Entered in AE Login)": "Conductor cut rf work"},
         ]

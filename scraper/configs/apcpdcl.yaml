@@ -1,31 +1,21 @@
-# APCPDCL (Central) column dialect -> canonical schema.
+# APCPDCL (Central) — LIVE: performanceDailyReportSection1 / sectionwiseDailyPowerSection.
+# The scraper pre-computes FeederName / FeederId / Voltage / SubDiv / Status;
+# this config maps those + the portal's own columns onto the schema.
 discom: APCPDCL
-date_dayfirst: true            # portal prints DD/MM/YYYY
+date_dayfirst: true            # Outage Start Time is DD-MM-YYYY HH:MM:SS
 
 field_map:
-  district: "District"
-  division: "Division"
-  subdivision: "SubDivision"
-  section: "Section"
-  feeder_name: "Feeder Name"
-  voltage_class: "KV"
-  outage_type: "Outage Type"
-  cause: "Cause"
-  affected_consumers: "Consumers Affected"
-  affected_villages: "Affected Areas"
-  outage_start: "Interruption Time"
-  expected_restoration: "ETR"
-  restored_at: "Restored Time"
-  status: "Current Status"
+  district: "Circle Name"          # already a full district name (e.g. PALNADU)
+  division: "Division Name"
+  subdivision: "SubDiv"            # phone-suffix stripped by the scraper
+  section: "Section Name"
+  feeder_name: "FeederName"
+  feeder_id: "FeederId"
+  voltage_class: "Voltage"
+  cause: "Interruption Reason (Entered in AE Login)"
+  outage_start: "Outage Start Time"
+  status: "Status"
 
 value_map:
   status:
-    "OFF": ongoing           # feeder de-energized = still out
-    "ON": restored           # feeder energized = restored
-  outage_type:
-    U: unplanned
-    P: planned
-  voltage_class:
-    "11": 11kV
-    "33": 33kV
-    "132": 132kV
+    OPEN: ongoing

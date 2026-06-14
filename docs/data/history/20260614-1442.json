@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-14T14:42:09+05:30",
+  "discoms": {
+    "APEPDCL": {
+      "status": "ok",
+      "count": 11,
+      "error": null,
+      "scraped_at": "2026-06-14T14:41:37+05:30"
+    },
+    "APCPDCL": {
+      "status": "ok",
+      "count": 0,
+      "error": null,
+      "scraped_at": "2026-06-14T14:42:09+05:30"
+    },
+    "APSPDCL": {
+      "status": "ok",
+      "count": 167,
+      "error": null,
+      "scraped_at": "2026-06-14T14:42:09+05:30"
+    }
+  },
+  "totals": {
+    "ongoing": 178,
+    "restored": 0,
+    "all": 178
+  }
+}
