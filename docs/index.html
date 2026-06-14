@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AP DISCOMs — Outage Dashboard (EPDCL · CPDCL · SPDCL)</title>
+  <meta name="description" content="Unified, near-real-time power outage tracker across Andhra Pradesh's three distribution companies." />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>AP DISCOMs Outage Dashboard</h1>
+        <p class="sub">Unified live view across EPDCL · CPDCL · SPDCL — independently aggregated</p>
+      </div>
+    </div>
+    <div class="freshness" id="freshness">
+      <span class="dot" id="liveDot"></span>
+      <span id="freshnessText">Loading…</span>
+    </div>
+  </header>
+
+  <!-- DISCOM health strip: shows per-portal status so staleness is honest -->
+  <section class="health" id="health"></section>
+
+  <!-- KPI cards -->
+  <section class="kpis" id="kpis"></section>
+
+  <!-- Filters -->
+  <section class="filters">
+    <div class="filter-group" id="discomChips" aria-label="Filter by DISCOM"></div>
+    <div class="filter-group" id="statusChips" aria-label="Filter by status"></div>
+  </section>
+  <section class="filters secondary">
+    <div class="search-wrap">
+      <span class="search-ico">⌕</span>
+      <input id="searchBox" class="search" type="search" autocomplete="off"
+             placeholder="Search feeder, area, division, cause…" aria-label="Search outages" />
+    </div>
+    <select id="voltageSelect" class="select" aria-label="Filter by voltage"></select>
+    <select id="typeSelect" class="select" aria-label="Filter by outage type"></select>
+    <button id="resetBtn" class="chip-btn" title="Clear all filters">↺ Reset</button>
+    <span class="result-count" id="resultCount"></span>
+  </section>
+
+  <main class="grid">
+    <!-- Map + drill-down -->
+    <section class="panel map-panel">
+      <div class="panel-head">
+        <h2>Outage Map</h2>
+        <div class="legend" id="mapLegend">
+          <span><i class="sw ongoing"></i> Ongoing</span>
+          <span><i class="sw restored"></i> Restored</span>
+          <span><i class="sw approx"></i> Approx.</span>
+          <span class="size-key"><i class="sw dotS"></i><i class="sw dotL"></i> ∝ consumers</span>
+        </div>
+      </div>
+      <div id="map"></div>
+      <p class="hint">Circle size ∝ consumers affected. Hollow markers are approximate (feeder coordinates not yet mapped).</p>
+    </section>
+
+    <section class="panel drill-panel">
+      <div class="panel-head">
+        <h2>Drill-down</h2>
+        <select id="sortSelect" class="select sm" aria-label="Sort drill-down">
+          <option value="ongoing">Sort: Ongoing</option>
+          <option value="consumers">Sort: Consumers</option>
+          <option value="name">Sort: Name</option>
+        </select>
+      </div>
+      <nav class="breadcrumb" id="breadcrumb"></nav>
+      <div class="drill-table-wrap">
+        <table class="drill-table" id="drillTable"></table>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="panel chart-panel">
+      <div class="panel-head"><h2>By DISCOM</h2></div>
+      <div class="chart" id="chartDiscom"></div>
+    </section>
+    <section class="panel chart-panel">
+      <div class="panel-head"><h2>Top Causes</h2></div>
+      <div class="chart" id="chartCause"></div>
+    </section>
+    <section class="panel chart-panel">
+      <div class="panel-head"><h2>By Voltage</h2></div>
+      <div class="chart" id="chartVoltage"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Data scraped from public OMS portals every ~15 min via GitHub Actions. Not affiliated with EPDCL/CPDCL/SPDCL.
+       Source of truth remains each DISCOM's official portal.</p>
+  </footer>
+
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/map.js"></script>
+  <script src="assets/js/drilldown.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

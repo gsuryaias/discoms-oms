@@ -1,0 +1,31 @@
+# APEPDCL (Eastern) column dialect -> canonical schema.
+# field_map: canonical_field -> the raw column header on the portal table.
+# Edit this when the portal renames a column. No code change needed.
+discom: APEPDCL
+date_dayfirst: true            # portal prints DD-MM-YYYY
+
+field_map:
+  district: "Circle"           # EPDCL's top admin unit ~ district granularity
+  division: "Division"
+  subdivision: "Sub Division"
+  section: "Section"
+  feeder_name: "Feeder"
+  voltage_class: "Voltage"
+  outage_type: "Type"
+  cause: "Reason"
+  affected_consumers: "Affected Services"
+  affected_villages: "Villages"
+  outage_start: "Trip Time"
+  expected_restoration: "Expected Restoration"
+  status: "Status"
+
+value_map:
+  status:
+    OPEN: ongoing
+    CLOSED: restored
+  outage_type:
+    FORCED: unplanned
+    PLANNED: planned
+  voltage_class:
+    "11KV": 11kV
+    "33KV": 33kV

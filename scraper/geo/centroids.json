@@ -1,0 +1,16 @@
+{
+  "Visakhapatnam": {"lat": 17.6868, "lng": 83.2185},
+  "Vizianagaram":  {"lat": 18.1067, "lng": 83.3956},
+  "Srikakulam":    {"lat": 18.2949, "lng": 83.8938},
+  "Kakinada":      {"lat": 16.9891, "lng": 82.2475},
+  "Rajahmundry":   {"lat": 16.9991, "lng": 81.7800},
+  "Vijayawada":    {"lat": 16.5062, "lng": 80.6480},
+  "Guntur":        {"lat": 16.3067, "lng": 80.4365},
+  "Eluru":         {"lat": 16.7107, "lng": 81.0952},
+  "Machilipatnam": {"lat": 16.1875, "lng": 81.1389},
+  "Tirupati":      {"lat": 13.6288, "lng": 79.4192},
+  "Nellore":       {"lat": 14.4426, "lng": 79.9865},
+  "Kadapa":        {"lat": 14.4673, "lng": 78.8242},
+  "Anantapur":     {"lat": 14.6819, "lng": 77.6006},
+  "Kurnool":       {"lat": 15.8281, "lng": 78.0373}
+}

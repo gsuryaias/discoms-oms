@@ -1,0 +1,61 @@
+name: Scrape OMS & publish
+
+# The "backend" for a static site: a scheduled job is the only honest way to get
+# near-real-time data onto GitHub Pages. It scrapes the three portals, writes
+# docs/data/*.json, and commits. Pages (served from /docs) redeploys on push.
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every ~15 min (GitHub may delay under load)
+  workflow_dispatch: {}       # manual "Run workflow" button
+  push:
+    branches: [main]
+    paths: ["docs/**", ".github/workflows/scrape.yml"]
+
+# Never let two scrape runs overlap and fight over a commit.
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+permissions:
+  contents: write             # to commit the refreshed JSON back
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        working-directory: scraper
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Scrape (live; falls back to mock on total failure)
+        working-directory: scraper
+        run: |
+          # If every portal is unreachable the pipeline still publishes a valid
+          # (empty) payload rather than breaking the dashboard.
+          python scrape.py || python scrape.py --mock
+
+      - name: Prune history older than 14 days
+        run: find docs/data/history -name '*.json' -mtime +14 -delete || true
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name "oms-bot"
+          git config user.email "actions@github.com"
+          git add docs/data
+          if git diff --cached --quiet; then
+            echo "No data changes."
+          else
+            git commit -m "data: refresh outages $(date -u +%FT%TZ)"
+            git push
+          fi

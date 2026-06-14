@@ -1,0 +1,31 @@
+# APCPDCL (Central) column dialect -> canonical schema.
+discom: APCPDCL
+date_dayfirst: true            # portal prints DD/MM/YYYY
+
+field_map:
+  district: "District"
+  division: "Division"
+  subdivision: "SubDivision"
+  section: "Section"
+  feeder_name: "Feeder Name"
+  voltage_class: "KV"
+  outage_type: "Outage Type"
+  cause: "Cause"
+  affected_consumers: "Consumers Affected"
+  affected_villages: "Affected Areas"
+  outage_start: "Interruption Time"
+  expected_restoration: "ETR"
+  restored_at: "Restored Time"
+  status: "Current Status"
+
+value_map:
+  status:
+    "OFF": ongoing           # feeder de-energized = still out
+    "ON": restored           # feeder energized = restored
+  outage_type:
+    U: unplanned
+    P: planned
+  voltage_class:
+    "11": 11kV
+    "33": 33kV
+    "132": 132kV

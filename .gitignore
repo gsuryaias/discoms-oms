@@ -1,0 +1,14 @@
+# Python
+scraper/.venv/
+__pycache__/
+*.pyc
+
+# Playwright / test artifacts
+.playwright-mcp/
+*.png
+
+# OS
+.DS_Store
+
+# Local tool settings
+.claude/settings.local.json
