@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-14T14:29:28+05:30",
+  "discoms": {
+    "APEPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "APEPDCL endpoint unreachable after 4 tries: SSLError(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1081)')))\"))",
+      "scraped_at": "2026-06-14T14:29:28+05:30"
+    },
+    "APCPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "APCPDCL live endpoint not yet confirmed",
+      "scraped_at": "2026-06-14T14:29:28+05:30"
+    },
+    "APSPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "APSPDCL live endpoint not yet confirmed",
+      "scraped_at": "2026-06-14T14:29:28+05:30"
+    }
+  },
+  "totals": {
+    "ongoing": 0,
+    "restored": 0,
+    "all": 0
+  }
+}

@@ -16,8 +16,9 @@ class ApspdclScraper(BaseScraper):
     # TODO(confirm): e.g. "https://www.apspdcl.in/OMS/feederSupplyStatusMap"
     report_url = "https://www.apspdcl.in/OMS/omsweb"
     table_selector = "table"
+    requires_browser = False
 
-    def scrape(self, page) -> list[dict]:
+    def fetch(self, page=None) -> list[dict]:
         # Not yet wired — see APCPDCL note. Fail cleanly; use --mock for demo.
         raise NotImplementedError("APSPDCL live endpoint not yet confirmed")
 

@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-14T14:30:36+05:30",
+  "discoms": {
+    "APEPDCL": {
+      "status": "ok",
+      "count": 7,
+      "error": null,
+      "scraped_at": "2026-06-14T14:30:36+05:30"
+    },
+    "APCPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "APCPDCL live endpoint not yet confirmed",
+      "scraped_at": "2026-06-14T14:30:36+05:30"
+    },
+    "APSPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "APSPDCL live endpoint not yet confirmed",
+      "scraped_at": "2026-06-14T14:30:36+05:30"
+    }
+  },
+  "totals": {
+    "ongoing": 7,
+    "restored": 0,
+    "all": 7
+  }
+}

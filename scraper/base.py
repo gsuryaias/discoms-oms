@@ -1,15 +1,19 @@
-"""Base scraper: the parts every DISCOM portal has in common.
+"""Base scraper: the shape every DISCOM scraper shares.
 
-All three portals (APEPDCL / APCPDCL / APSPDCL) are server-rendered Java apps
-behind a jsessionid. The live-interruption screens we care about render an HTML
-<table>. So the common job is always the same:
+Two fetch strategies are supported, chosen per-DISCOM:
 
-    open a session -> navigate to the report -> read the table -> rows of dicts
+  * HTTP (preferred): the portal's table is populated by a simple POST endpoint
+    that returns an HTML fragment. We hit it directly with `requests` — no
+    browser, no JS, fast and reliable on CI. Set `requires_browser = False` and
+    override `fetch()`.
+  * Browser (fallback): for portals that only render via JS with no clean
+    endpoint. Set `requires_browser = True`; the orchestrator hands `fetch()` a
+    Playwright page and the default navigate/extract reads the first table.
 
-Everything portal-specific (the URL, how you reach the live-interruption report,
-the table selector) lives in the per-DISCOM subclass + its YAML config. That is
-deliberate: when a portal tweaks its markup, you edit one subclass/config, and
-the normalizer, geo, frontend and the other two DISCOMs are untouched.
+Both strategies return *raw* rows (portal column headers). `transform()` is an
+optional per-DISCOM hook to massage raw rows (e.g. expand codes, derive status)
+before the generic, config-driven normalizer maps them onto the canonical schema.
+Keeping portal quirks here means one portal's change never touches another.
 """
 
 from __future__ import annotations
@@ -22,11 +26,11 @@ CONFIG_DIR = pathlib.Path(__file__).parent / "configs"
 
 
 class BaseScraper:
-    # subclasses set these
-    discom: str = ""           # APEPDCL | APCPDCL | APSPDCL
-    config_name: str = ""      # filename stem under configs/
-    report_url: str = ""       # the live-interruption report endpoint
-    table_selector: str = "table"  # CSS selector for the data table
+    discom: str = ""
+    config_name: str = ""
+    report_url: str = ""
+    table_selector: str = "table"
+    requires_browser: bool = True   # default safe; HTTP scrapers set False
 
     def __init__(self):
         if not self.config_name:
@@ -35,35 +39,43 @@ class BaseScraper:
         self.discom = self.config["discom"]
 
     def _load_config(self) -> dict:
-        path = CONFIG_DIR / f"{self.config_name}.yaml"
-        with path.open(encoding="utf-8") as fh:
+        with (CONFIG_DIR / f"{self.config_name}.yaml").open(encoding="utf-8") as fh:
             return yaml.safe_load(fh)
 
-    # ------------------------------------------------------------------ #
-    # The one method subclasses usually override. Default works for any
-    # portal whose live report is a single static HTML <table> at a URL.
-    # Portals that need clicks/filters first should override navigate().
-    # ------------------------------------------------------------------ #
+    # ---- live fetch (override one strategy) -------------------------------- #
+    def fetch(self, page) -> list[dict]:
+        """Return raw portal rows. Default = browser strategy."""
+        self.navigate(page)
+        return self.extract_rows(page)
+
+    # ---- per-DISCOM raw massaging (optional) ------------------------------- #
+    def transform(self, rows: list[dict]) -> list[dict]:
+        return rows
+
+    # ---- offline fixtures -------------------------------------------------- #
+    def mock_rows(self) -> list[dict]:
+        return []
+
+    # ---- single entry point the orchestrator calls ------------------------- #
+    def scrape(self, page=None, mock: bool = False) -> list[dict]:
+        raw = self.mock_rows() if mock else self.fetch(page)
+        return self.transform(raw)
+
+    # ---- browser strategy helpers (used only when requires_browser) -------- #
     def navigate(self, page):
-        """Drive the page until the data table is on screen. Override as needed."""
-        page.goto(self.report_url, wait_until="networkidle", timeout=60_000)
-        page.wait_for_selector(self.table_selector, timeout=30_000)
+        # domcontentloaded + explicit wait for a data row is far more reliable
+        # than networkidle, which hangs on portals with keep-alive connections.
+        page.goto(self.report_url, wait_until="domcontentloaded", timeout=60_000)
+        page.wait_for_selector(f"{self.table_selector} tbody tr", timeout=45_000)
 
     def extract_rows(self, page) -> list[dict]:
-        """Read the first matching <table> into a list of {header: cell} dicts.
-
-        Uses the first row as headers. This is intentionally generic — most of
-        these report tables follow it. If a portal uses a non-standard grid,
-        override this method in the subclass.
-        """
         return page.evaluate(
             """(selector) => {
                 const table = document.querySelector(selector);
                 if (!table) return [];
                 const rows = [...table.querySelectorAll('tr')];
                 if (rows.length < 2) return [];
-                const headers = [...rows[0].querySelectorAll('th,td')]
-                    .map(c => c.innerText.trim());
+                const headers = [...rows[0].querySelectorAll('th,td')].map(c => c.innerText.trim());
                 return rows.slice(1).map(tr => {
                     const cells = [...tr.querySelectorAll('td')].map(c => c.innerText.trim());
                     const rec = {};
@@ -73,12 +85,3 @@ class BaseScraper:
             }""",
             self.table_selector,
         )
-
-    def scrape(self, page) -> list[dict]:
-        """Return raw portal rows (un-normalized). Orchestrator normalizes them."""
-        self.navigate(page)
-        return self.extract_rows(page)
-
-    # Optional: a fixture of raw rows so the pipeline can run without network.
-    def mock_rows(self) -> list[dict]:
-        return []

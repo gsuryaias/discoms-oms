@@ -51,7 +51,7 @@ def _run_one(scraper, page, mock: bool, centroids: dict) -> tuple[list[dict], di
     """Returns (records, status_dict) for a single DISCOM. Never raises."""
     name = scraper.discom
     try:
-        raw = scraper.mock_rows() if mock else scraper.scrape(page)
+        raw = scraper.scrape(page=page, mock=mock)
         # geo is handled centrally in geo.enrich, so pass no centroids here.
         records = normalizer.normalize(raw, scraper.config, centroids={})
         status = {"status": "ok", "count": len(records), "error": None}
@@ -69,8 +69,12 @@ def collect(mock: bool, only: str | None) -> dict:
     all_records: list[dict] = []
     discom_status: dict[str, dict] = {}
 
+    # Only spin up a browser if some chosen scraper actually needs one (most use
+    # the direct-HTTP strategy, so usually we don't — keeps CI fast and avoids
+    # the Chromium-on-runner fragility that an HTTP POST sidesteps entirely).
+    need_browser = (not mock) and any(c.requires_browser for c in chosen.values())
     page = browser = pw = None
-    if not mock:
+    if need_browser:
         from playwright.sync_api import sync_playwright
         pw = sync_playwright().start()
         browser = pw.chromium.launch(headless=True)

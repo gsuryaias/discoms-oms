@@ -9,7 +9,7 @@ on:
   workflow_dispatch: {}       # manual "Run workflow" button
   push:
     branches: [main]
-    paths: ["docs/**", ".github/workflows/scrape.yml"]
+    paths: ["scraper/**", ".github/workflows/scrape.yml"]
 
 # Never let two scrape runs overlap and fight over a commit.
 concurrency:
@@ -36,14 +36,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
 
-      - name: Scrape (live; falls back to mock on total failure)
+      - name: Scrape (live; direct HTTP, no browser)
         working-directory: scraper
-        run: |
-          # If every portal is unreachable the pipeline still publishes a valid
-          # (empty) payload rather than breaking the dashboard.
-          python scrape.py || python scrape.py --mock
+        run: python scrape.py
 
       - name: Prune history older than 14 days
         run: find docs/data/history -name '*.json' -mtime +14 -delete || true
