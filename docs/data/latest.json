@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-06-16T21:49:54+05:30",
+  "generated_at": "2026-06-16T23:44:14+05:30",
   "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f699a7218b0>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-16T21:44:06+05:30"
+      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f2345c42450>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-16T23:38:26+05:30"
     },
     "APCPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f699a290470>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-16T21:49:53+05:30"
+      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f2345c68200>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-16T23:44:14+05:30"
     },
     "APSPDCL": {
       "status": "ok",
       "count": 50,
       "error": null,
-      "scraped_at": "2026-06-16T21:49:54+05:30"
+      "scraped_at": "2026-06-16T23:44:14+05:30"
     }
   },
   "totals": {
@@ -28,30 +28,7 @@
   },
   "outages": [
     {
-      "outage_id": "APSPDCL-20260616-077c06e1",
-      "discom": "APSPDCL",
-      "district": "NELLORE",
-      "division": "KOVUR",
-      "subdivision": "INDUKURPETA C AND O/ MUDIVARTHYPALEM",
-      "section": null,
-      "feeder_name": "11 KV RAMUDUPALEM+11 KV PALLIPALEM",
-      "feeder_id": "304713240203 - 11190917",
-      "voltage_class": "11kV",
-      "outage_type": null,
-      "cause": "",
-      "affected_consumers": null,
-      "affected_villages": [],
-      "lat": 14.4426,
-      "lng": 79.9865,
-      "outage_start": "2026-06-16T09:54:15+05:30",
-      "expected_restoration": null,
-      "restored_at": null,
-      "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
-      "geo_precision": "district"
-    },
-    {
-      "outage_id": "APSPDCL-20260616-5615e197",
+      "outage_id": "APSPDCL-20260616-cb7cb12a",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "YEMMIGANUR",
@@ -70,11 +47,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-191e9a20",
+      "outage_id": "APSPDCL-20260616-37e4184f",
       "discom": "APSPDCL",
       "district": "NELLORE",
       "division": "KAVALI",
@@ -93,11 +70,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-29b609a8",
+      "outage_id": "APSPDCL-20260616-b1641ed5",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -116,11 +93,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-9211548c",
+      "outage_id": "APSPDCL-20260616-8fe7a346",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "ADONI",
@@ -139,11 +116,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-3557b13b",
+      "outage_id": "APSPDCL-20260616-07af7e99",
       "discom": "APSPDCL",
       "district": "TIRUPATI",
       "division": "NAIDUPETA",
@@ -162,11 +139,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-4667a62f",
+      "outage_id": "APSPDCL-20260616-59a2cca8",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -185,11 +162,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-390ee635",
+      "outage_id": "APSPDCL-20260616-4851071f",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -208,11 +185,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-d25170a9",
+      "outage_id": "APSPDCL-20260616-9e965bca",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -231,11 +208,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-40c2bb5e",
+      "outage_id": "APSPDCL-20260616-e20bbec4",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -254,11 +231,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-5ba60c47",
+      "outage_id": "APSPDCL-20260616-f7f5d6b1",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -277,11 +254,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-2ff0ad04",
+      "outage_id": "APSPDCL-20260616-112365ca",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -300,11 +277,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-475eb7e1",
+      "outage_id": "APSPDCL-20260616-e21d9541",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -323,11 +300,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-496c75be",
+      "outage_id": "APSPDCL-20260616-a89af4c8",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -346,11 +323,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-22121d69",
+      "outage_id": "APSPDCL-20260616-40d9923c",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -369,11 +346,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-3afd310c",
+      "outage_id": "APSPDCL-20260616-ee06a909",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -392,11 +369,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-719e846a",
+      "outage_id": "APSPDCL-20260616-e28f8671",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "HINDUPUR",
@@ -415,11 +392,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-2e3737b8",
+      "outage_id": "APSPDCL-20260616-ee601826",
       "discom": "APSPDCL",
       "district": "CHITTOOR",
       "division": "CHITTOOR RURALS",
@@ -438,11 +415,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-a3f1a877",
+      "outage_id": "APSPDCL-20260616-f7bae486",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -461,11 +438,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-c83217c5",
+      "outage_id": "APSPDCL-20260616-37ff5298",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -484,11 +461,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-bbb074b6",
+      "outage_id": "APSPDCL-20260616-6fc89aa0",
       "discom": "APSPDCL",
       "district": "KADAPA",
       "division": "RAJAMPET",
@@ -507,11 +484,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-6c06bcf3",
+      "outage_id": "APSPDCL-20260616-4f90a220",
       "discom": "APSPDCL",
       "district": "ANNAMAYYA",
       "division": "MADANAPALE",
@@ -530,11 +507,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-6fe30f10",
+      "outage_id": "APSPDCL-20260616-03c6335d",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -553,11 +530,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-32b763e0",
+      "outage_id": "APSPDCL-20260616-42fe1577",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -576,11 +553,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-08c2c015",
+      "outage_id": "APSPDCL-20260616-c4db50d6",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -599,11 +576,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-d6a595fb",
+      "outage_id": "APSPDCL-20260616-f2cc7f42",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -622,11 +599,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-0884c82b",
+      "outage_id": "APSPDCL-20260616-404cd0cd",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -645,11 +622,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-2094888e",
+      "outage_id": "APSPDCL-20260616-430c6abf",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -668,11 +645,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-5351af57",
+      "outage_id": "APSPDCL-20260616-112d8163",
       "discom": "APSPDCL",
       "district": "KADAPA",
       "division": "RAJAMPET",
@@ -691,11 +668,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-5d1fbd3b",
+      "outage_id": "APSPDCL-20260616-d42df362",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "ANANTHAPUR",
@@ -714,11 +691,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-7830dde3",
+      "outage_id": "APSPDCL-20260616-7a8541e9",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "YEMMIGANUR",
@@ -737,11 +714,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-7e188e86",
+      "outage_id": "APSPDCL-20260616-d18f1de6",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "ADONI",
@@ -760,11 +737,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-21749179",
+      "outage_id": "APSPDCL-20260616-7fab8506",
       "discom": "APSPDCL",
       "district": "CHITTOOR",
       "division": "CHITTOOR TOWN",
@@ -783,11 +760,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-d4218de8",
+      "outage_id": "APSPDCL-20260616-99e256c5",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -806,11 +783,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-eb7b607c",
+      "outage_id": "APSPDCL-20260616-e383e68f",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "YEMMIGANUR",
@@ -829,11 +806,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-ce4369d1",
+      "outage_id": "APSPDCL-20260616-34797ce3",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "GOOTY",
@@ -852,11 +829,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-a8daefcc",
+      "outage_id": "APSPDCL-20260616-1d45e49b",
       "discom": "APSPDCL",
       "district": "KURNOOL",
       "division": "YEMMIGANUR",
@@ -875,11 +852,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-a27dbba4",
+      "outage_id": "APSPDCL-20260616-0d408fae",
       "discom": "APSPDCL",
       "district": "SRISATHYASAI",
       "division": "KADIRI",
@@ -898,11 +875,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-d5e88e0b",
+      "outage_id": "APSPDCL-20260616-ff432538",
       "discom": "APSPDCL",
       "district": "TIRUPATI",
       "division": "TIRUPATI TOWN",
@@ -921,11 +898,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-089ed8ea",
+      "outage_id": "APSPDCL-20260616-d2dcceab",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "KALYANDURG",
@@ -944,11 +921,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-ce34ca4b",
+      "outage_id": "APSPDCL-20260616-55ffba57",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "KALYANDURG",
@@ -967,11 +944,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-75d35816",
+      "outage_id": "APSPDCL-20260616-d194dbb2",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "KALYANDURG",
@@ -990,11 +967,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-dfc627c2",
+      "outage_id": "APSPDCL-20260616-cd5d545f",
       "discom": "APSPDCL",
       "district": "KADAPA",
       "division": "RAJAMPET",
@@ -1013,11 +990,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-e958133f",
+      "outage_id": "APSPDCL-20260616-c3f1dd41",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "KALYANDURG",
@@ -1036,11 +1013,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-c96316ee",
+      "outage_id": "APSPDCL-20260616-e68ee1d2",
       "discom": "APSPDCL",
       "district": "NANDYAL",
       "division": "ATMAKURU-NAN",
@@ -1059,11 +1036,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-eadf921e",
+      "outage_id": "APSPDCL-20260616-dd976859",
       "discom": "APSPDCL",
       "district": "ANANTAPUR",
       "division": "ANANTHAPUR",
@@ -1082,11 +1059,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-e5fdf37f",
+      "outage_id": "APSPDCL-20260616-e02cf6d9",
       "discom": "APSPDCL",
       "district": "ANNAMAYYA",
       "division": "RAYACHOTY",
@@ -1105,11 +1082,11 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-9d4041da",
+      "outage_id": "APSPDCL-20260616-5b69f1aa",
       "discom": "APSPDCL",
       "district": "ANNAMAYYA",
       "division": "PILERU",
@@ -1128,34 +1105,34 @@
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-9376f907",
+      "outage_id": "APSPDCL-20260616-5cfbd649",
       "discom": "APSPDCL",
-      "district": "KURNOOL",
-      "division": "ADONI",
-      "subdivision": "ALLUR_KNL/ AE ALLUR",
+      "district": "NANDYAL",
+      "division": "NANDYAL",
+      "subdivision": "ALLAGADDA/ SIRIVELLA",
       "section": null,
-      "feeder_name": "11KV ARIKERA",
-      "feeder_id": "308312140105 - 11189863",
+      "feeder_name": "11KV KOTAPADU",
+      "feeder_id": "308223440103 - 11190804",
       "voltage_class": "11kV",
       "outage_type": null,
       "cause": "",
       "affected_consumers": null,
       "affected_villages": [],
-      "lat": 15.8281,
-      "lng": 78.0373,
-      "outage_start": "2026-06-16T21:28:53+05:30",
+      "lat": 15.478,
+      "lng": 78.483,
+      "outage_start": "2026-06-16T22:32:39+05:30",
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     },
     {
-      "outage_id": "APSPDCL-20260616-770a618e",
+      "outage_id": "APSPDCL-20260616-93f5e46d",
       "discom": "APSPDCL",
       "district": "NANDYAL",
       "division": "NANDYAL",
@@ -1170,11 +1147,34 @@
       "affected_villages": [],
       "lat": 15.478,
       "lng": 78.483,
-      "outage_start": "2026-06-16T21:29:52+05:30",
+      "outage_start": "2026-06-16T23:19:51+05:30",
       "expected_restoration": null,
       "restored_at": null,
       "status": "ongoing",
-      "scraped_at": "2026-06-16T21:49:54+05:30",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
+      "geo_precision": "district"
+    },
+    {
+      "outage_id": "APSPDCL-20260616-f111ea62",
+      "discom": "APSPDCL",
+      "district": "KADAPA",
+      "division": "KADAPA",
+      "subdivision": "KADAPA OPERATION 2/ KADAPA EAST",
+      "section": null,
+      "feeder_name": "11KV PRAKASH NAGAR",
+      "feeder_id": "306113140106 - 11195253",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 14.4673,
+      "lng": 78.8242,
+      "outage_start": "2026-06-16T23:26:52+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-16T23:44:14+05:30",
       "geo_precision": "district"
     }
   ]
