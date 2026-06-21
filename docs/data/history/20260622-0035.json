@@ -1,6 +1,5 @@
 {
   "generated_at": "2026-06-22T00:35:44+05:30",
-  "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
@@ -25,30 +24,5 @@
     "ongoing": 1,
     "restored": 0,
     "all": 1
-  },
-  "outages": [
-    {
-      "outage_id": "APSPDCL-20260622-1f801ff7",
-      "discom": "APSPDCL",
-      "district": "NANDYAL",
-      "division": "NANDYAL",
-      "subdivision": "KOILKUNTLA/ KOILAKUNTLA",
-      "section": null,
-      "feeder_name": "11KV C R VEMULA",
-      "feeder_id": "308235140302 - 11189583",
-      "voltage_class": "11kV",
-      "outage_type": null,
-      "cause": "",
-      "affected_consumers": null,
-      "affected_villages": [],
-      "lat": 15.478,
-      "lng": 78.483,
-      "outage_start": "2026-06-22T00:06:20+05:30",
-      "expected_restoration": null,
-      "restored_at": null,
-      "status": "ongoing",
-      "scraped_at": "2026-06-22T00:35:44+05:30",
-      "geo_precision": "district"
-    }
-  ]
+  }
 }
