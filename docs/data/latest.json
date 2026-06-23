@@ -1,30 +1,100 @@
 {
-  "generated_at": "2026-06-24T00:45:15+05:30",
+  "generated_at": "2026-06-24T01:39:33+05:30",
   "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7fafdad4fad0>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-24T00:39:27+05:30"
+      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f1d3fe23470>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-24T01:33:45+05:30"
     },
     "APCPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7fafda8c0440>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-24T00:45:14+05:30"
+      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f1d3fc603b0>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-24T01:39:32+05:30"
     },
     "APSPDCL": {
       "status": "ok",
-      "count": 0,
+      "count": 3,
       "error": null,
-      "scraped_at": "2026-06-24T00:45:15+05:30"
+      "scraped_at": "2026-06-24T01:39:33+05:30"
     }
   },
   "totals": {
-    "ongoing": 0,
+    "ongoing": 3,
     "restored": 0,
-    "all": 0
+    "all": 3
   },
-  "outages": []
+  "outages": [
+    {
+      "outage_id": "APSPDCL-20260624-40ad5d5d",
+      "discom": "APSPDCL",
+      "district": "SRISATHYASAI",
+      "division": "PUTTAPARTHY",
+      "subdivision": "DHARMAVARAM/ 1.DHARMAVARAM-1",
+      "section": null,
+      "feeder_name": "11KV C K PURAM",
+      "feeder_id": "307521140101 - 11192781",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 14.16,
+      "lng": 77.81,
+      "outage_start": "2026-06-24T01:11:04+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-24T01:39:33+05:30",
+      "geo_precision": "district"
+    },
+    {
+      "outage_id": "APSPDCL-20260624-476c12a1",
+      "discom": "APSPDCL",
+      "district": "SRISATHYASAI",
+      "division": "PUTTAPARTHY",
+      "subdivision": "DHARMAVARAM/ 1.DHARMAVARAM-1",
+      "section": null,
+      "feeder_name": "11KV SHIRDI SAI",
+      "feeder_id": "307521140102 - 11192538",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 14.16,
+      "lng": 77.81,
+      "outage_start": "2026-06-24T01:11:09+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-24T01:39:33+05:30",
+      "geo_precision": "district"
+    },
+    {
+      "outage_id": "APSPDCL-20260624-2b07f1df",
+      "discom": "APSPDCL",
+      "district": "TIRUPATI",
+      "division": "TIRUPATI TOWN",
+      "subdivision": "KODUR/ SS KODUR",
+      "section": null,
+      "feeder_name": "11KV BALAPALLI",
+      "feeder_id": "306321240301 - X0476140",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 13.6288,
+      "lng": 79.4192,
+      "outage_start": "2026-06-24T01:24:47+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-24T01:39:33+05:30",
+      "geo_precision": "district"
+    }
+  ]
 }
