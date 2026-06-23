@@ -1,6 +1,5 @@
 {
   "generated_at": "2026-06-24T03:53:53+05:30",
-  "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
@@ -25,30 +24,5 @@
     "ongoing": 1,
     "restored": 0,
     "all": 1
-  },
-  "outages": [
-    {
-      "outage_id": "APSPDCL-20260624-7dd3c5e3",
-      "discom": "APSPDCL",
-      "district": "KADAPA",
-      "division": "KADAPA",
-      "subdivision": "KADAPA OPERATION 2/ KADAPA EAST",
-      "section": null,
-      "feeder_name": "11KV GANDHI NAGAR",
-      "feeder_id": "306113140107 - X0476844",
-      "voltage_class": "11kV",
-      "outage_type": null,
-      "cause": "",
-      "affected_consumers": null,
-      "affected_villages": [],
-      "lat": 14.4673,
-      "lng": 78.8242,
-      "outage_start": "2026-06-24T03:26:39+05:30",
-      "expected_restoration": null,
-      "restored_at": null,
-      "status": "ongoing",
-      "scraped_at": "2026-06-24T03:53:53+05:30",
-      "geo_precision": "district"
-    }
-  ]
+  }
 }
