@@ -1,30 +1,77 @@
 {
-  "generated_at": "2026-06-24T05:49:01+05:30",
+  "generated_at": "2026-06-24T06:56:57+05:30",
   "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f122a0f5520>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-24T05:43:13+05:30"
+      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f670e365f70>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-24T06:51:09+05:30"
     },
     "APCPDCL": {
       "status": "error",
       "count": 0,
-      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f122a098770>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
-      "scraped_at": "2026-06-24T05:49:00+05:30"
+      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f670df003e0>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-24T06:56:56+05:30"
     },
     "APSPDCL": {
       "status": "ok",
-      "count": 0,
+      "count": 2,
       "error": null,
-      "scraped_at": "2026-06-24T05:49:01+05:30"
+      "scraped_at": "2026-06-24T06:56:57+05:30"
     }
   },
   "totals": {
-    "ongoing": 0,
+    "ongoing": 2,
     "restored": 0,
-    "all": 0
+    "all": 2
   },
-  "outages": []
+  "outages": [
+    {
+      "outage_id": "APSPDCL-20260624-cefa3e34",
+      "discom": "APSPDCL",
+      "district": "ANANTAPUR",
+      "division": "KALYANDURG",
+      "subdivision": "KALYANDURG RURALS/ B.SAMUDRAM",
+      "section": null,
+      "feeder_name": "11 KV GUDIPALLI",
+      "feeder_id": "307613440102 - 11193180",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 14.6819,
+      "lng": 77.6006,
+      "outage_start": "2026-06-24T06:30:08+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-24T06:56:57+05:30",
+      "geo_precision": "district"
+    },
+    {
+      "outage_id": "APSPDCL-20260624-71a42999",
+      "discom": "APSPDCL",
+      "district": "SRISATHYASAI",
+      "division": "PUTTAPARTHY",
+      "subdivision": "PUTTAPARTHY/ GORANTLA",
+      "section": null,
+      "feeder_name": "11KV GANGAMPALLI",
+      "feeder_id": "307444340402 - X2145954",
+      "voltage_class": "11kV",
+      "outage_type": null,
+      "cause": "",
+      "affected_consumers": null,
+      "affected_villages": [],
+      "lat": 14.16,
+      "lng": 77.81,
+      "outage_start": "2026-06-24T06:45:07+05:30",
+      "expected_restoration": null,
+      "restored_at": null,
+      "status": "ongoing",
+      "scraped_at": "2026-06-24T06:56:57+05:30",
+      "geo_precision": "district"
+    }
+  ]
 }
