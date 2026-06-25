@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-06-26T02:38:40+05:30",
+  "discoms": {
+    "APEPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "https://oms.apeasternpower.com/HTServiceDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='oms.apeasternpower.com', port=443): Max retries exceeded with url: /HTServiceDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='oms.apeasternpower.com', port=443) at 0x7f15289b3770>, 'Connection to oms.apeasternpower.com timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-26T02:32:52+05:30"
+    },
+    "APCPDCL": {
+      "status": "error",
+      "count": 0,
+      "error": "https://apcpdcl.in/OMS/sectionwiseDailyPowerSection unreachable after 5 tries: ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='apcpdcl.in', port=443): Max retries exceeded with url: /OMS/sectionwiseDailyPowerSection (Caused by ConnectTimeoutError(<HTTPSConnection(host='apcpdcl.in', port=443) at 0x7f15289e8680>, 'Connection to apcpdcl.in timed out. (connect timeout=30)'))\"))",
+      "scraped_at": "2026-06-26T02:38:39+05:30"
+    },
+    "APSPDCL": {
+      "status": "ok",
+      "count": 18,
+      "error": null,
+      "scraped_at": "2026-06-26T02:38:40+05:30"
+    }
+  },
+  "totals": {
+    "ongoing": 18,
+    "restored": 0,
+    "all": 18
+  }
+}
