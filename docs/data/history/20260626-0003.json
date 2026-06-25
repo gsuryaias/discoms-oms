@@ -1,6 +1,5 @@
 {
   "generated_at": "2026-06-26T00:03:16+05:30",
-  "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
@@ -25,6 +24,5 @@
     "ongoing": 0,
     "restored": 0,
     "all": 0
-  },
-  "outages": []
+  }
 }
