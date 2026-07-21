@@ -1,6 +1,5 @@
 {
   "generated_at": "2026-07-21T05:53:47+05:30",
-  "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
@@ -25,30 +24,5 @@
     "ongoing": 1,
     "restored": 0,
     "all": 1
-  },
-  "outages": [
-    {
-      "outage_id": "APSPDCL-20260721-84fcbb9f",
-      "discom": "APSPDCL",
-      "district": "NELLORE",
-      "division": "ATMAKURU_NLR",
-      "subdivision": "UDAYAGIRI/ V K PADU",
-      "section": null,
-      "feeder_name": "11KV GNANESWARAPURAM",
-      "feeder_id": "304411240401 - X2320223",
-      "voltage_class": "11kV",
-      "outage_type": null,
-      "cause": "",
-      "affected_consumers": null,
-      "affected_villages": [],
-      "lat": 14.4426,
-      "lng": 79.9865,
-      "outage_start": "2026-07-21T05:24:19+05:30",
-      "expected_restoration": null,
-      "restored_at": null,
-      "status": "ongoing",
-      "scraped_at": "2026-07-21T05:53:47+05:30",
-      "geo_precision": "district"
-    }
-  ]
+  }
 }
