@@ -1,6 +1,5 @@
 {
   "generated_at": "2026-08-09T00:11:24+05:30",
-  "source": "live",
   "discoms": {
     "APEPDCL": {
       "status": "error",
@@ -25,30 +24,5 @@
     "ongoing": 1,
     "restored": 0,
     "all": 1
-  },
-  "outages": [
-    {
-      "outage_id": "APSPDCL-20260809-19abc4ae",
-      "discom": "APSPDCL",
-      "district": "SRISATHYASAI",
-      "division": "PUTTAPARTHY",
-      "subdivision": "PUTTAPARTHY/ GORANTLA",
-      "section": null,
-      "feeder_name": "11KV VANAVOLU",
-      "feeder_id": "307444340201 - S32460010276",
-      "voltage_class": "11kV",
-      "outage_type": null,
-      "cause": "",
-      "affected_consumers": null,
-      "affected_villages": [],
-      "lat": 14.16,
-      "lng": 77.81,
-      "outage_start": "2026-08-09T00:00:15+05:30",
-      "expected_restoration": null,
-      "restored_at": null,
-      "status": "ongoing",
-      "scraped_at": "2026-08-09T00:11:24+05:30",
-      "geo_precision": "district"
-    }
-  ]
+  }
 }
